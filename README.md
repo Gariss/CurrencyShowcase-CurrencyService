@@ -5,4 +5,4 @@
 - **Currency Service**
 - **User Service**
 - **Favorites Service**
-- **API Gateway Services**
+- **API Gateway Service**
