@@ -1,22 +1,54 @@
-var builder = WebApplication.CreateBuilder(args);
+using Serilog;
+using System.Reflection;
+using UserService.Database;
+using UserService.WebApi.Extensions;
 
+namespace UserService.WebApi;
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
+public class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services
+            .AddSwaggerGen(opts =>
+            {
+                var xmlFile = Assembly.GetExecutingAssembly().GetName().Name + ".xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                opts.IncludeXmlComments(xmlPath, true);
+            })
+            .AddHttpContextAccessor()
+            .AddEndpointsApiExplorer()
+            .AddCustomDbContext(builder.Configuration)
+            .AddInternalModules(builder.Configuration)
+            .AddCustomLogging(builder.Configuration);
+
+        builder.Services.AddControllers();
+        builder.Services.AddRouting(options =>
+        {
+            options.LowercaseUrls = true;
+        });
+
+        var app = builder.Build();
+
+        if (!app.Environment.IsProduction())
+        {
+            app.MigrateDb<CurrencyShowcaseContext>();
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
+        app.UseSerilogRequestLogging();
+
+        app.UseHttpsRedirection();
+
+        app.UseAuthentication();
+
+        app.UseAuthorization();
+
+        app.MapControllers();
+
+        app.Run();
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
