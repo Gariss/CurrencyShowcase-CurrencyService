@@ -4,8 +4,9 @@ namespace CurrencyService.WebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[ProducesResponseType<ValidationProblemDetails>(StatusCodes.Status400BadRequest)]
-[ProducesResponseType(StatusCodes.Status404NotFound)]
+[ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest)]
+[ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
+[ProducesResponseType<ProblemDetails>(StatusCodes.Status500InternalServerError)]
 public class ControllerBase : Microsoft.AspNetCore.Mvc.ControllerBase
 {
 }

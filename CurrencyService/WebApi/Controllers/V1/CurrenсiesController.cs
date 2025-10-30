@@ -46,7 +46,6 @@ public class CurrenсiesController(
     /// </summary>
     [HttpPost("refresh")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> RefreshCurrenciesAsync(CancellationToken cancellationToken)
     {
         var result = await _currencyService.RefreshCurrenciesAsync(cancellationToken);
