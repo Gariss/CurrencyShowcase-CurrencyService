@@ -41,7 +41,7 @@ public class CurrencyService(
         }
 
         // acquire lightweight lock
-        await _semaphore.WaitAsync();
+        await _semaphore.WaitAsync(cancellationToken);
 
         try
         {

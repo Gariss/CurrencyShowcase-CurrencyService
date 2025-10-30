@@ -53,7 +53,7 @@ public class CurrenсiesController(
 
         if (!result)
         {
-            return Problem("Something went wrong", statusCode: 500);
+            return Problem("Unable to refresh currencies", statusCode: 500);
         }
 
         return Ok();
