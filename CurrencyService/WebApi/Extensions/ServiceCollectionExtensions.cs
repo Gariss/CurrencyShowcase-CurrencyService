@@ -16,7 +16,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
     {
-        var dataSourceBuilder = new NpgsqlDataSourceBuilder(configuration.GetConnectionString("FinancesDb"));
+        var dataSourceBuilder = new NpgsqlDataSourceBuilder(configuration.GetConnectionString("CurrencyShowcaseDb"));
         var dataSource = dataSourceBuilder.Build();
 
         services.AddDbContext<CurrencyShowcaseContext>(optionsBuilder =>
