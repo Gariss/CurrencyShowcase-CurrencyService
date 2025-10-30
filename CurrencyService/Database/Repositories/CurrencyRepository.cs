@@ -10,12 +10,12 @@ public class CurrencyRepository(CurrencyShowcaseContext dbContext, ILogger<Curre
     private readonly CurrencyShowcaseContext _dbContext = dbContext;
     private readonly ILogger<CurrencyRepository> _logger = logger;
 
-    public async Task<Currency?> GetByNameAsync(string name, CancellationToken cancellationToken)
+    public async Task<Currency?> GetByCharCodeAsync(string charCode, CancellationToken cancellationToken)
     {
         return await _dbContext
             .Currencies
             .AsNoTracking()
-            .Where(c => c.Name == name)
+            .Where(c => c.CharCode == charCode)
             .SingleOrDefaultAsync(cancellationToken);
     }
 

@@ -24,18 +24,25 @@ namespace CurrencyService.Database.Migrations
             modelBuilder.Entity("CurrencyService.Domain.Entities.Currency", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("text");
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
+
+                    b.Property<string>("CharCode")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<decimal>("Rate")
                         .HasColumnType("numeric(18,4)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "Name" }, "IX_Currency_Name")
+                    b.HasIndex("CharCode")
                         .IsUnique();
 
                     b.ToTable("Currencies");

@@ -6,7 +6,7 @@ public interface ICurrencyService
 {
     Task<IEnumerable<Currency>> GetListAsync(CancellationToken cancellationToken);
 
-    Task<Currency?> GetByNameAsync(string name, CancellationToken cancellationToken);
+    Task<Currency?> GetByCharCodeAsync(string charCode, CancellationToken cancellationToken);
 
     Task<bool> RefreshCurrenciesAsync(CancellationToken cancellationToken);
 }

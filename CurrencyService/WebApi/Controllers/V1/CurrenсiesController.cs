@@ -23,15 +23,15 @@ public class CurrenсiesController(
     }
 
     /// <summary>
-    /// Get currency by name (char code)
+    /// Get currency by char code
     /// </summary>
-    [HttpGet("{name}")]
+    [HttpGet("{charCode}")]
     [ProducesResponseType(typeof(Currency), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetByNameAsync(
-        [FromRoute] string name,
+        [FromRoute] string charCode,
         CancellationToken cancellationToken)
     {
-        var result = await _currencyService.GetByNameAsync(name, cancellationToken);
+        var result = await _currencyService.GetByCharCodeAsync(charCode, cancellationToken);
 
         if (result == null)
         {

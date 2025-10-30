@@ -25,9 +25,9 @@ public class CurrencyService(
         return await _currencyRepository.GetListAsync(cancellationToken);
     }
 
-    public async Task<Currency?> GetByNameAsync(string name, CancellationToken cancellationToken)
+    public async Task<Currency?> GetByCharCodeAsync(string charCode, CancellationToken cancellationToken)
     {
-        return await _currencyRepository.GetByNameAsync(name, cancellationToken);
+        return await _currencyRepository.GetByCharCodeAsync(charCode, cancellationToken);
     }
 
     public async Task<bool> RefreshCurrenciesAsync(CancellationToken cancellationToken)
@@ -45,7 +45,6 @@ public class CurrencyService(
 
         try
         {
-            // Устанавливаем флаг после получения семафора
             Interlocked.Exchange(ref _isRunning, 1);
             result = await RefreshCurrenciesJobAsync(cancellationToken);
         }
@@ -60,7 +59,7 @@ public class CurrencyService(
         return result;
     }
 
-    public async Task<bool> RefreshCurrenciesJobAsync(CancellationToken cancellationToken)
+    private async Task<bool> RefreshCurrenciesJobAsync(CancellationToken cancellationToken)
     {
         Console.WriteLine("Start refreshing currencies...");
 
@@ -80,7 +79,13 @@ public class CurrencyService(
         var currenciesToUpload = response
             .Content
             .Valutes
-            .Select(x => new Currency { Id = x.Id, Name = x.CharCode, Rate = x.VunitRateDecimal })
+            .Select(x => new Currency 
+                {
+                    Id = x.Id,
+                    CharCode = x.CharCode,
+                    Name = x.Name,
+                    Rate = x.VunitRateDecimal 
+                })
             .ToList();
 
         var uploadResult = await _currencyRepository.UploadAsync(currenciesToUpload, cancellationToken);

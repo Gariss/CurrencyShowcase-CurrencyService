@@ -14,8 +14,9 @@ namespace CurrencyService.Database.Migrations
                 name: "Currencies",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
+                    CharCode = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Rate = table.Column<decimal>(type: "numeric(18,4)", nullable: false)
                 },
                 constraints: table =>
@@ -24,9 +25,9 @@ namespace CurrencyService.Database.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Currency_Name",
+                name: "IX_Currencies_CharCode",
                 table: "Currencies",
-                column: "Name",
+                column: "CharCode",
                 unique: true);
         }
 

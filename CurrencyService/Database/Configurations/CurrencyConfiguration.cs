@@ -10,10 +10,23 @@ internal class CurrencyConfiguration : IEntityTypeConfiguration<Currency>
     {
         builder.HasKey(x => x.Id);
 
-        builder.HasIndex(e => e.Name, "IX_Currency_Name")
-            .IsUnique();
+        builder.Property(x => x.Id)
+            .IsRequired()
+            .HasMaxLength(10);
+
+        builder.Property(x => x.CharCode)
+            .IsRequired()
+            .HasMaxLength(100);
+
+        builder.Property(x => x.Name)
+            .IsRequired()
+            .HasMaxLength(100);
 
         builder.Property(x => x.Rate)
+            .IsRequired()
             .HasColumnType("numeric(18,4)");
+
+        builder.HasIndex(e => e.CharCode)
+            .IsUnique();
     }
 }

@@ -37,7 +37,6 @@ public class CbrXmlContentSerializer : IHttpContentSerializer
 
     public HttpContent ToHttpContent<T>(T item)
     {
-        // 
         return new StringContent(string.Empty);
     }
 }

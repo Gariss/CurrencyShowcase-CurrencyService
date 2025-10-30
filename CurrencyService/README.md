@@ -16,11 +16,11 @@ Returns a list of all available currencies.
 
 **Response:** `200 OK` with array of `Currency` objects
 
-### `GET /api/currencies/{name}`
+### `GET /api/currencies/{charCode}`
 Returns details for a specific currency by its character code.
 
 **Parameters:**
-- `name` (path) - Currency character code (e.g., USD, EUR, GBP)
+- `charCode` (path) - Currency character code (e.g., USD, EUR, GBP)
 
 **Response:** `200 OK` with `Currency` object  
 **Errors:** `404 Not Found` if currency doesn't exist

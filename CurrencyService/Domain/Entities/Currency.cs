@@ -2,9 +2,11 @@
 
 public class Currency
 {
-    public required string Id { get; set; }
+    public string Id { get; init; }
 
-    public required string Name { get; set; }
+    public string CharCode { get; init; }
 
-    public required decimal Rate { get; set; }
+    public string Name { get; init; }
+
+    public decimal Rate { get; init; }
 }

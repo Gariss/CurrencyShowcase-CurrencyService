@@ -5,7 +5,6 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89F45B14-4C6C-4E96-A55F-3398936AC778}"
 	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -15,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Databa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{6EE19FE6-1781-45F2-A913-4257153D6470}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{B83834B3-FB6C-4B9A-809C-22FA268B46AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{B83834B3-FB6C-4B9A-809C-22FA268B46AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
