@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CurrencyService.Database.Migrations
 {
     [DbContext(typeof(CurrencyShowcaseContext))]
-    [Migration("20251030112333_Initial")]
+    [Migration("20251030155944_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
