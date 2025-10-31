@@ -30,6 +30,8 @@ public class Program
             options.LowercaseUrls = true;
         });
 
+        builder.Services.AddJwtValidation(builder.Configuration);
+
         var app = builder.Build();
 
         if (!app.Environment.IsProduction())

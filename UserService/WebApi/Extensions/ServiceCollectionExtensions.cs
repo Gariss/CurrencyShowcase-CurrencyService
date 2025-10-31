@@ -72,6 +72,8 @@ public static class ServiceCollectionExtensions
                     ValidateIssuer = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
+                    ValidAudience = jwtOptions.Audience,
+                    ValidIssuer = jwtOptions.Issuer,
                     IssuerSigningKey = new SymmetricSecurityKey(secretKey)
                 };
             });
