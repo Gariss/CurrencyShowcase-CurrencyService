@@ -1,5 +1,6 @@
 using FavoritesService.Database;
 using FavoritesService.WebApi.Extensions;
+using FavoritesService.WebApi.Middleware;
 using Serilog;
 using System.Reflection;
 
@@ -43,9 +44,7 @@ public class Program
 
         app.UseHttpsRedirection();
 
-        app.UseAuthentication();
-
-        app.UseAuthorization();
+        app.UseMiddleware<UserIdentityMiddleware>();
 
         app.MapControllers();
 

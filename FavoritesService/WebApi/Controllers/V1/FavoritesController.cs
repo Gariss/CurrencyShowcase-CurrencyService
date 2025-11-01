@@ -38,7 +38,7 @@ public class FavoritesController(
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> AddToFavorites([FromBody][Required] string[] currencyIds, CancellationToken cancellationToken)
+    public async Task<IActionResult> AddToFavorites([FromBody] string[] currencyIds, CancellationToken cancellationToken)
     {
         try
         {
@@ -84,11 +84,13 @@ public class FavoritesController(
 
     private Guid GetUserIdFromClaims()
     {
-        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out var userId))
+        var userIdString = HttpContext.Items["UserId"]?.ToString();
+
+        if (string.IsNullOrEmpty(userIdString) || !Guid.TryParse(userIdString, out Guid userId))
         {
-            throw new UnauthorizedAccessException("Invalid user ID in token");
+            throw new UnauthorizedAccessException("User is not identified"); 
         }
+
         return userId;
     }
 }
