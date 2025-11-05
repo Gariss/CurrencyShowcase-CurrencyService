@@ -1,0 +1,72 @@
+{
+  "ReverseProxy": {
+    "Routes": {
+      "user-service-register": {
+        "ClusterId": "user-service",
+        "Match": {
+          "Path": "/api/users",
+          "Methods": [ "POST" ]
+        },
+        "Transforms": [
+          { "PathPattern": "/api/users" }
+        ]
+      },
+      "user-service-login": {
+        "ClusterId": "user-service",
+        "Match": {
+          "Path": "/api/users/login"
+        },
+        "Transforms": [
+          { "PathPattern": "/api/users/login" }
+        ]
+      },
+      "user-service-require-auth": {
+        "ClusterId": "user-service",
+        "Match": {
+          "Path": "/api/users/{**catch-all}"
+        },
+        "Transforms": [
+          { "PathPattern": "/api/users/{**catch-all}" }
+        ],
+        "AuthorizationPolicy": "require-auth"
+      },
+      "favorites-service-require-auth": {
+        "ClusterId": "favorites-service",
+        "Match": {
+          "Path": "/api/favorites/{**catch-all}"
+        },
+        "Transforms": [
+          { "PathPattern": "/api/favorites/{**catch-all}" }
+        ],
+        "AuthorizationPolicy": "require-auth"
+      },
+      "currency-service-require-auth": {
+        "ClusterId": "currency-service",
+        "Match": {
+          "Path": "/api/currencies/{**catch-all}"
+        },
+        "Transforms": [
+          { "PathPattern": "/api/currencies/{**catch-all}" }
+        ],
+        "AuthorizationPolicy": "require-auth"
+      }
+    },
+    "Clusters": {
+      "user-service": {
+        "Destinations": {
+          "server1": { "Address": "https://localhost:5012/" }
+        }
+      },
+      "currency-service": {
+        "Destinations": {
+          "server1": { "Address": "https://localhost:5022/" }
+        }
+      },
+      "favorites-service": {
+        "Destinations": {
+          "server1": { "Address": "https://localhost:5002/" }
+        }
+      }
+    }
+  }
+}
