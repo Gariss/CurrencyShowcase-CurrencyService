@@ -19,7 +19,7 @@ public class FavoritesController(
     {
         try
         {
-            var userId = GetUserIdFromClaims();
+            var userId = GetUserIdFromContext();
             var favorites = await _favoritesService.GetUserFavoritesAsync(userId, cancellationToken);
 
             return Ok(favorites);
@@ -42,7 +42,7 @@ public class FavoritesController(
     {
         try
         {
-            var userId = GetUserIdFromClaims();
+            var userId = GetUserIdFromContext();
             await _favoritesService.AddToFavoritesAsync(userId, currencyIds, cancellationToken);
 
             return Ok();
@@ -65,7 +65,7 @@ public class FavoritesController(
     {
         try
         {
-            var userId = GetUserIdFromClaims();
+            var userId = GetUserIdFromContext();
             await _favoritesService.RemoveFromFavoritesAsync(userId, currencyIds, cancellationToken);
 
             return Ok();
@@ -82,7 +82,7 @@ public class FavoritesController(
         }
     }
 
-    private Guid GetUserIdFromClaims()
+    private Guid GetUserIdFromContext()
     {
         var userIdString = HttpContext.Items["UserId"]?.ToString();
 
