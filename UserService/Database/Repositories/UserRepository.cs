@@ -14,7 +14,10 @@ public class UserRepository(CurrencyShowcaseContext dbContext, ILogger<UserRepos
     {
         try
         {
-            await _dbContext.Users.AddAsync(newUser, cancellationToken);
+            await _dbContext
+                .Users
+                .AddAsync(newUser, cancellationToken);
+
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             return true;

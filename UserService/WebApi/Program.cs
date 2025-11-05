@@ -30,8 +30,6 @@ public class Program
             options.LowercaseUrls = true;
         });
 
-        builder.Services.AddJwtValidation(builder.Configuration);
-
         var app = builder.Build();
 
         if (!app.Environment.IsProduction())
@@ -44,10 +42,6 @@ public class Program
         app.UseSerilogRequestLogging();
 
         app.UseHttpsRedirection();
-
-        app.UseAuthentication();
-
-        app.UseAuthorization();
 
         app.MapControllers();
 

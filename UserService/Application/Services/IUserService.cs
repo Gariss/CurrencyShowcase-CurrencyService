@@ -10,6 +10,4 @@ public interface IUserService
     Task<UserResponse?> GetByLoginAsync(string login, CancellationToken cancellationToken);
 
     Task<LoginResponse> LoginAsync(LoginRequest request, CancellationToken cancellationToken);
-
-    Task LogoutAsync(string login, CancellationToken cancellationToken);
 }

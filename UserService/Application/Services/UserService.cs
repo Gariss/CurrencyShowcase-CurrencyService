@@ -96,9 +96,4 @@ public class UserService(
 
         return response;
     }
-
-    public Task LogoutAsync(string login, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
 }
