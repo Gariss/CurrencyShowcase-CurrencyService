@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CurrencyService.WebApi.Controllers.V1;
 
-public class CurrenсiesController(
+public class CurrenciesController(
     ICurrencyService currencyService) : ControllerBase
 {
     private readonly ICurrencyService _currencyService = currencyService;
