@@ -63,6 +63,18 @@ public class UsersController(
     }
 
     /// <summary>
+    /// Logout user
+    /// </summary>
+    [HttpPost("logout")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> Logout(CancellationToken cancellationToken)
+    {
+        // Dummy for swagger
+        // Logout is performing at the ApiGateway side
+        return Ok();
+    }
+
+    /// <summary>
     /// Get user profile
     /// </summary>
     [HttpGet]
