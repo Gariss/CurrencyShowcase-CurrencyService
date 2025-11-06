@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using FavoritesService.Application.Services;
 using FavoritesService.Domain.Entities;
-using System.ComponentModel.DataAnnotations;
 
 namespace FavoritesService.WebApi.Controllers.V1;
 
