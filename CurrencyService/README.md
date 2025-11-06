@@ -1,4 +1,4 @@
-# Currency Service
+# Currency Service API
 
 - Background Service for refreshing of all currency rates from the data source
 - A simple RESTful API for managing and retrieving currency exchange rates.
