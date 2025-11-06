@@ -44,7 +44,12 @@ public class Program
         if (!app.Environment.IsProduction())
         {
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/user-service/swagger.json", "User Service");
+                c.SwaggerEndpoint("/currency-service/swagger.json", "Currency Service");
+                c.SwaggerEndpoint("/favorites-service/swagger.json", "Favorites Service");
+            });
         }
 
         app.UseSerilogRequestLogging();

@@ -49,6 +49,33 @@
           { "PathPattern": "/api/currencies/{**catch-all}" }
         ],
         "AuthorizationPolicy": "require-auth"
+      },
+      "user-service-swagger": {
+        "ClusterId": "user-service",
+        "Match": {
+          "Path": "/user-service/swagger.json"
+        },
+        "Transforms": [
+          { "PathPattern": "/swagger/v1/swagger.json" }
+        ]
+      },
+      "currency-service-swagger": {
+        "ClusterId": "currency-service",
+        "Match": {
+          "Path": "/currency-service/swagger.json"
+        },
+        "Transforms": [
+          { "PathPattern": "/swagger/v1/swagger.json" }
+        ]
+      },
+      "favorites-service-swagger": {
+        "ClusterId": "favorites-service",
+        "Match": {
+          "Path": "/favorites-service/swagger.json"
+        },
+        "Transforms": [
+          { "PathPattern": "/swagger/v1/swagger.json" }
+        ]
       }
     },
     "Clusters": {
