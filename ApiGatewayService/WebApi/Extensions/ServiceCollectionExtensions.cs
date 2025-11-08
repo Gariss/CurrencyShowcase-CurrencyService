@@ -57,6 +57,26 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
+    public static IServiceCollection AddCorsFrontEnd(this IServiceCollection services, IConfiguration configuration)
+    {
+        var corsOptionsSection = configuration.GetRequiredSection(nameof(CorsSettings));
+        var corsSettings = corsOptionsSection.Get<CorsSettings>();
+
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowFrontend", policy =>
+            {
+                policy.WithOrigins(corsSettings.AllowedOrigins)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                        .WithExposedHeaders("Authorization", "authorization"); ;
+            });
+        });
+
+        return services;
+    }
+
     public static IServiceCollection AddAuthorizationPolicy(this IServiceCollection services)
     {
         services.AddAuthorization(options =>

@@ -27,6 +27,7 @@ public class Program
             .AddHttpContextAccessor()
             .AddEndpointsApiExplorer()
             .AddCustomLogging(builder.Configuration)
+            .AddCorsFrontEnd(builder.Configuration)
             .AddJwtValidation(builder.Configuration)
             .AddAuthorizationPolicy()
             .AddYarp(builder.Configuration);
@@ -40,6 +41,8 @@ public class Program
         builder.Services.AddSingleton<IWhitelistService, WhitelistService>();
 
         var app = builder.Build();
+
+        app.UseCors("AllowFrontend");
 
         if (!app.Environment.IsProduction())
         {
