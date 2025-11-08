@@ -6,3 +6,5 @@
 - **User Service**
 - **Favorites Service**
 - **API Gateway Service**
+
+## Front-end Application
