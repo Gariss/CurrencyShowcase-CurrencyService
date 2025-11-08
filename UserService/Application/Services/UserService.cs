@@ -51,9 +51,9 @@ public class UserService(
         }
     }
 
-    public async Task<UserResponse?> GetByLoginAsync(string login, CancellationToken cancellationToken)
+    public async Task<UserResponse?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetByLoginAsync(login, cancellationToken);
+        var user = await _userRepository.GetByIdAsync(id, cancellationToken);
 
         return user is not null ?
             new UserResponse

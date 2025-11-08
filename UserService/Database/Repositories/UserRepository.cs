@@ -29,6 +29,13 @@ public class UserRepository(CurrencyShowcaseContext dbContext, ILogger<UserRepos
         }
     }
 
+    public async Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    {
+        return await _dbContext
+            .Users
+            .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+    }
+
     public async Task<User?> GetByLoginAsync(string login, CancellationToken cancellationToken)
     {
         return await _dbContext

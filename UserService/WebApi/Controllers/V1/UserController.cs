@@ -79,11 +79,13 @@ public class UsersController(
     /// </summary>
     [HttpGet]
     [ProducesResponseType<UserResponse>(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetProfile([FromQuery] string login, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetProfile(CancellationToken cancellationToken)
     {
         try
         {
-            var result = await _userService.GetByLoginAsync(login, cancellationToken);
+            var userId = GetUserIdFromContext();
+
+            var result = await _userService.GetByIdAsync(userId, cancellationToken);
             if (result == null)
             {
                 return NotFound();
@@ -91,10 +93,26 @@ public class UsersController(
 
             return Ok(result);
         }
+        catch (UnauthorizedAccessException ex)
+        {
+            _logger.LogError(ex, "User identification error");
+            return Problem(statusCode: StatusCodes.Status401Unauthorized, title: ex.Message);
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "User profile loading error");
             return Problem(statusCode: StatusCodes.Status500InternalServerError, title: "Internal error");
         }
+    }
+    private Guid GetUserIdFromContext()
+    {
+        var userIdString = HttpContext.Items["UserId"]?.ToString();
+
+        if (string.IsNullOrEmpty(userIdString) || !Guid.TryParse(userIdString, out Guid userId))
+        {
+            throw new UnauthorizedAccessException("User is not identified");
+        }
+
+        return userId;
     }
 }

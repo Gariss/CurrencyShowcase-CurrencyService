@@ -2,6 +2,7 @@ using Serilog;
 using System.Reflection;
 using UserService.Database;
 using UserService.WebApi.Extensions;
+using UserService.WebApi.Middleware;
 
 namespace UserService.WebApi;
 
@@ -42,6 +43,8 @@ public class Program
         app.UseSerilogRequestLogging();
 
         app.UseHttpsRedirection();
+
+        app.UseMiddleware<UserIdentityMiddleware>();
 
         app.MapControllers();
 

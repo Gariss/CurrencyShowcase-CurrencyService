@@ -7,7 +7,7 @@ public interface IUserService
 {
     Task RegisterAsync(UserRegisterRequest request, CancellationToken cancellationToken);
 
-    Task<UserResponse?> GetByLoginAsync(string login, CancellationToken cancellationToken);
+    Task<UserResponse?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
     Task<LoginResponse> LoginAsync(LoginRequest request, CancellationToken cancellationToken);
 }
